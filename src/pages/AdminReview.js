@@ -6,7 +6,7 @@ export default function AdminReview() {
     const [reviews, setReviews] = useState([]);
 
     useEffect(() => {
-        fetch("https://travel-backend-1-fgwb.onrender.com/api/v1/review")
+        fetch("https://travel-frontend-liart-ten.vercel.app//api/v1/review")
             .then((res) => res.json())
             .then((res) => setReviews(res.data));
     }, []);
@@ -14,7 +14,7 @@ export default function AdminReview() {
     // Function to handle deletion of a review
     const handleDeleteReview = async (reviewId) => {
         try {
-            const res = await fetch(`https://travel-backend-1-fgwb.onrender.com/api/v1/review/${reviewId}`, {
+            const res = await fetch(`https://travel-frontend-liart-ten.vercel.app//api/v1/review/${reviewId}`, {
                 method: "DELETE",
             });
             if (!res.ok) throw new Error("Failed to delete review");

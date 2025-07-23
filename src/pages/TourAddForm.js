@@ -20,7 +20,7 @@ const TourAddForm = () => {
 
     useEffect(() => {
         if (param.id) {
-            fetch(`https://travel-backend-1-fgwb.onrender.com/api/v1/tours/${param.id}`)
+            fetch(`https://travel-frontend-liart-ten.vercel.app//api/v1/tours/${param.id}`)
                 .then(res => res.json())
                 .then(res => {
                     setTour(res.data);
@@ -35,8 +35,8 @@ const TourAddForm = () => {
 
     const handleSubmit = () => {
         const url = param.id
-            ? `https://travel-backend-1-fgwb.onrender.com/api/v1/tours/${param.id}`
-            : "https://travel-backend-1-fgwb.onrender.com/api/v1/tours";
+            ? `https://travel-frontend-liart-ten.vercel.app//api/v1/tours/${param.id}`
+            : "https://travel-frontend-liart-ten.vercel.app//api/v1/tours";
 
         const method = param.id ? "PUT" : "POST";
 
