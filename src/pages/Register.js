@@ -1,4 +1,3 @@
-import { Button } from 'react-native';
 import React, { useState, useContext } from "react";
 import "../styles/register.css";
 import { Container, Row, Col, Form, FormGroup, Button } from "reactstrap";
@@ -12,22 +11,14 @@ import Swal from "sweetalert2";
 const Register = () => {
   const [credentials, setCredentials] = useState({
     email: "",
-<<<<<<< HEAD
-=======
-    otp: "",
->>>>>>> 8178db62821a310ad5201db51194487225840226
     username: "",
     password: "",
     role: "user",
   });
-<<<<<<< HEAD
 
   const [otpDigits, setOtpDigits] = useState(["", "", "", ""]);
-  const [step, setStep] = useState(1); // Step 1: Email → 2: OTP → 3: Register
-=======
-  
-  const [step, setStep] = useState(1); // Step 1: Email -> Step 2: OTP -> Step 3: Username & Password
->>>>>>> 8178db62821a310ad5201db51194487225840226
+  const [step, setStep] = useState(1); // Step 1: Email -> 2: OTP -> 3: Register
+
   const { dispatch } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -35,22 +26,14 @@ const Register = () => {
     setCredentials((prev) => ({ ...prev, [e.target.id]: e.target.value }));
   };
 
-<<<<<<< HEAD
   // ✅ Step 1: Send OTP
   const sendOTP = async () => {
-=======
-  // ✅ **Step 1: Send OTP**
-   const sendOTP = async () => {
-    console.log("Sending OTP to:", `${BASE_URL}/auth/send-otp`);
-  
->>>>>>> 8178db62821a310ad5201db51194487225840226
     try {
       const res = await fetch(`${BASE_URL}/auth/send-otp`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: credentials.email }),
       });
-<<<<<<< HEAD
 
       const result = await res.json();
 
@@ -59,13 +42,13 @@ const Register = () => {
           title: "Success",
           text: "OTP sent to your email",
           icon: "success",
-          timer: 3500, // Auto close after 3.5 sec
+          timer: 3500,
           timerProgressBar: false,
           showConfirmButton: false,
-          allowOutsideClick: true, // Allow closing by clicking outside
-          allowEscapeKey: true     // Allow closing with ESC
+          allowOutsideClick: true,
+          allowEscapeKey: true
         }).then(() => {
-          setStep(2); // Runs when alert closes (timer or outside click)
+          setStep(2);
         });
       } else {
         Swal.fire({
@@ -94,7 +77,6 @@ const Register = () => {
     }
   };
 
-
   // ✅ Step 2: Verify OTP
   const verifyOTP = async () => {
     const otp = otpDigits.join("");
@@ -110,27 +92,6 @@ const Register = () => {
         allowOutsideClick: true,
         allowEscapeKey: true
       });
-=======
-  
-      const result = await res.json();
-      console.log("API Response:", result);  // 🔍 Debugging log
-  
-      if (res.ok) {
-        Swal.fire("Success", "OTP sent to your email", "success");
-        setStep(2); // Move to OTP verification step
-      } else {
-        Swal.fire("Error", result.message, "error");
-      }
-    } catch (err) {
-      console.error("Error:", err);  // 🔍 Debugging log
-      Swal.fire("Error", "Failed to send OTP. Try again.", "error");
-    }
-  };
-  // ✅ **Step 2: Verify OTP**
-  const verifyOTP = async () => {
-    if (!credentials.otp) {
-      Swal.fire("Error", "Please enter the OTP", "error");
->>>>>>> 8178db62821a310ad5201db51194487225840226
       return;
     }
 
@@ -154,9 +115,8 @@ const Register = () => {
           allowOutsideClick: true,
           allowEscapeKey: true
         }).then(() => {
-          setStep(3); // Proceed only after alert closes (timer or click outside)
+          setStep(3);
         });
-
       } else {
         Swal.fire({
           title: "Error",
@@ -169,8 +129,8 @@ const Register = () => {
           allowEscapeKey: true
         });
       }
-
     } catch (err) {
+      console.error("Error:", err);
       Swal.fire({
         title: "Error",
         text: "OTP verification failed. Try again.",
@@ -184,6 +144,7 @@ const Register = () => {
     }
   };
 
+  // ✅ Step 3: Register
   const handleRegister = async (e) => {
     e.preventDefault();
     const otp = otpDigits.join("");
@@ -225,7 +186,6 @@ const Register = () => {
         }).then(() => {
           navigate("/login");
         });
-
       } else {
         Swal.fire({
           title: "Error",
@@ -238,8 +198,8 @@ const Register = () => {
           allowEscapeKey: true
         });
       }
-
     } catch (err) {
+      console.error("Error:", err);
       Swal.fire({
         title: "Error",
         text: "Registration failed. Try again.",
@@ -318,7 +278,7 @@ const Register = () => {
                             const newOtp = [...otpDigits];
                             newOtp[index] = value;
                             setOtpDigits(newOtp);
-                            if (value && index < 5) {
+                            if (value && index < 3) {
                               const nextInput = document.getElementById(`otp-${index + 1}`);
                               if (nextInput) nextInput.focus();
                             }
@@ -332,15 +292,11 @@ const Register = () => {
                         />
                       ))}
                     </FormGroup>
-
                     <div style={{ textAlign: "center" }}>
                       <Button
                         className="btn secondary__btn auth__btn"
                         onClick={verifyOTP}
-                        style={{
-                          width: "240px",
-                          marginTop: "10px",
-                        }}
+                        style={{ width: "240px", marginTop: "10px" }}
                       >
                         Verify OTP
                       </Button>
