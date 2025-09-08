@@ -1,3 +1,4 @@
+import { Button } from 'react-native';
 import React, { useState, useContext } from "react";
 import "../styles/register.css";
 import { Container, Row, Col, Form, FormGroup, Button } from "reactstrap";
@@ -11,13 +12,22 @@ import Swal from "sweetalert2";
 const Register = () => {
   const [credentials, setCredentials] = useState({
     email: "",
+<<<<<<< HEAD
+=======
+    otp: "",
+>>>>>>> 8178db62821a310ad5201db51194487225840226
     username: "",
     password: "",
     role: "user",
   });
+<<<<<<< HEAD
 
   const [otpDigits, setOtpDigits] = useState(["", "", "", ""]);
   const [step, setStep] = useState(1); // Step 1: Email → 2: OTP → 3: Register
+=======
+  
+  const [step, setStep] = useState(1); // Step 1: Email -> Step 2: OTP -> Step 3: Username & Password
+>>>>>>> 8178db62821a310ad5201db51194487225840226
   const { dispatch } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -25,14 +35,22 @@ const Register = () => {
     setCredentials((prev) => ({ ...prev, [e.target.id]: e.target.value }));
   };
 
+<<<<<<< HEAD
   // ✅ Step 1: Send OTP
   const sendOTP = async () => {
+=======
+  // ✅ **Step 1: Send OTP**
+   const sendOTP = async () => {
+    console.log("Sending OTP to:", `${BASE_URL}/auth/send-otp`);
+  
+>>>>>>> 8178db62821a310ad5201db51194487225840226
     try {
       const res = await fetch(`${BASE_URL}/auth/send-otp`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: credentials.email }),
       });
+<<<<<<< HEAD
 
       const result = await res.json();
 
@@ -92,6 +110,27 @@ const Register = () => {
         allowOutsideClick: true,
         allowEscapeKey: true
       });
+=======
+  
+      const result = await res.json();
+      console.log("API Response:", result);  // 🔍 Debugging log
+  
+      if (res.ok) {
+        Swal.fire("Success", "OTP sent to your email", "success");
+        setStep(2); // Move to OTP verification step
+      } else {
+        Swal.fire("Error", result.message, "error");
+      }
+    } catch (err) {
+      console.error("Error:", err);  // 🔍 Debugging log
+      Swal.fire("Error", "Failed to send OTP. Try again.", "error");
+    }
+  };
+  // ✅ **Step 2: Verify OTP**
+  const verifyOTP = async () => {
+    if (!credentials.otp) {
+      Swal.fire("Error", "Please enter the OTP", "error");
+>>>>>>> 8178db62821a310ad5201db51194487225840226
       return;
     }
 

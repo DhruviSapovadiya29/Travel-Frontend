@@ -29,6 +29,7 @@ const Routers = () => {
             <Route path='/about' element={<About />} />
             <Route path='/register' element={<Register />} />
             <Route path='/booking' element={<Booking />} />
+<<<<<<< HEAD
             <Route path='/addtour' element={<TourAddForm />} />
             <Route path='/addtour/:id' element={<TourAddForm />} />
             <Route path="/thank-you" element={<ThankYou />} />
@@ -40,6 +41,18 @@ const Routers = () => {
             <Route path='/gallery' element={<MesonryImagesGallery />} />
             <Route path='/tours/search' element={<SearchResultList />} />
             <Route path='/forgot-password' element={<ForgotPassword />} />
+=======
+            <Route path='/addtour' element={<TourAddForm/>}/>
+            <Route path='/addtour/:id' element={<TourAddForm/>}/>
+            <Route path="/thank-you" element={<ThankYou />} />
+            <Route path="/admin" element={<AdminPanel />} >
+            <Route index element={<AdminTours />} />
+            <Route path="/admin/adminBooking" element={<AdminBookingTour />} />
+            <Route path="/admin/review" element={<AdminReview/>}/>
+            </Route>
+            <Route path='/gallery' element={<MesonryImagesGallery />} />
+            <Route path='/tours/search' element={<SearchResultList />} />
+>>>>>>> 8178db62821a310ad5201db51194487225840226
         </Routes>
     )
 }

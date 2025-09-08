@@ -49,7 +49,6 @@ const Header = () => {
     });
   };
 
-
   useEffect(() => {
     const stickyHeaderFunc = () => {
       if (window.scrollY > 80) {
